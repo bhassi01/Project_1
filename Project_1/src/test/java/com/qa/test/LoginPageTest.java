@@ -7,10 +7,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.qa.base.BaseTest;
+import com.qa.pages.HomePage;
 import com.qa.pages.LoginPage;
 
 public class LoginPageTest extends BaseTest {
 	 LoginPage loginpage;
+	 HomePage homepage;
 
 	LoginPageTest() {
 		super();
@@ -34,6 +36,12 @@ public class LoginPageTest extends BaseTest {
 		String Title=loginpage.Get_Title();
 		Assert.assertEquals(Title, "Online Shopping Site for Mobiles, Electronics, Furniture, Grocery, Lifestyle, Books & More. Best Offers!");
 	}
+	@Test()
+	public HomePage Login_Btn_click_Test() {
+		 homepage =loginpage.Login_Btn_Click();
+		 return  new HomePage();
+	}
+	
 	
 	
 	@AfterMethod()

@@ -36,8 +36,8 @@ public class LoginPage extends BaseTest {
 		return Searchbar.isEnabled();
 	}
 
-	public LoginPage Login_Btn_Click() {
-		return new LoginPage();}
+	public HomePage Login_Btn_Click() {
+		return new HomePage();}
 
 	public String Get_Title() {
 		return driver.getTitle();
