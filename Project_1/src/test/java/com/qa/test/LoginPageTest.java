@@ -1,5 +1,11 @@
 package com.qa.test;
 
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
@@ -7,12 +13,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.qa.base.BaseTest;
-import com.qa.pages.HomePage;
 import com.qa.pages.LoginPage;
+import com.qa.pages.LandingPage;
 
 public class LoginPageTest extends BaseTest {
-	 LoginPage loginpage;
-	 HomePage homepage;
+	 LandingPage landingpage;
+	 LoginPage homepage;
 
 	LoginPageTest() {
 		super();
@@ -21,27 +27,25 @@ public class LoginPageTest extends BaseTest {
 	@BeforeMethod()
 	public void setup() {
 		initialise();
-		loginpage = new LoginPage();
-	}
+		landingpage = new LandingPage();
+		WebDriverWait wait =new WebDriverWait(driver, 5);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id ='nav-logo']")));
+		String title = landingpage.Get_Title();
+		System.out.println(title);
+		landingpage.Click_LoginLink();
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		landingpage.enter_Emailid();
+		wait.until(ExpectedConditions.visibilityOf((WebElement) By.xpath("//a[@id='password']")));
+		
+		
+}
 	
-	@Test
-	public void check_image_Test()
-	{
-	Boolean value =loginpage.checkimage();
-	Assert.assertTrue(value);
+	@Test()
+	public void test1() {
+	
+		landingpage.enter_password();
 		
 	}
-	@Test
-	public void check_Title_Test() {
-		String Title=loginpage.Get_Title();
-		Assert.assertEquals(Title, "Online Shopping Site for Mobiles, Electronics, Furniture, Grocery, Lifestyle, Books & More. Best Offers!");
-	}
-	@Test()
-	public HomePage Login_Btn_click_Test() {
-		 homepage =loginpage.Login_Btn_Click();
-		 return  new HomePage();
-	}
-	
 	
 	
 	@AfterMethod()

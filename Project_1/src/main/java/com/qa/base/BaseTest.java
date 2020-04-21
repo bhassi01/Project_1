@@ -20,7 +20,7 @@ public class BaseTest {
 		try {
 			prop = new Properties();
 			FileInputStream fis = new FileInputStream(
-					"E://softwares//eclipse//Project_1//src//main//java//com//qa//config//config.properties");
+					"E://softwares//eclipse//Project_1//src//main//java//com//qa//config//parameter.properties");
 			prop.load(fis);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -43,6 +43,7 @@ public class BaseTest {
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
 		driver.manage().timeouts().pageLoadTimeout(5000, TimeUnit.SECONDS);
+		System.out.println(prop.getProperty("url"));
 		driver.get(prop.getProperty("url"));
 		
 		
